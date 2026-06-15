@@ -1,0 +1,18 @@
+{
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^8.0",
+        "vite-plugin-symfony": "^8.2.4"
+    },
+    "dependencies": {
+        "@hotwired/stimulus": "^3.2.2",
+        "@symfony/ux-vue": "^3.1.0",
+        "@vitejs/plugin-vue": "^6.0.7",
+        "vue": "^3.5.38"
+    }
+}

@@ -35,6 +35,15 @@
             "migrations/.gitignore"
         ]
     },
+    "pentatrion/vite-bundle": {
+        "version": "8.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "6.5",
+            "ref": "3a6673f248f8fc1dd364dadfef4c5b381d1efab6"
+        }
+    },
     "phpunit/phpunit": {
         "version": "13.2",
         "recipe": {
@@ -270,16 +279,16 @@
             "templates/base.html.twig"
         ]
     },
-    "symfony/ux-turbo": {
+    "symfony/ux-vue": {
         "version": "3.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "2.20",
-            "ref": "287f7c6eb6e9b65e422d34c00795b360a787380b"
+            "version": "2.9",
+            "ref": "8b87f5866b5af6728a58aaf7f5ba77e3816e35ed"
         },
         "files": [
-            "config/packages/ux_turbo.yaml"
+            "assets/vue/controllers/Hello.vue"
         ]
     },
     "symfony/validator": {

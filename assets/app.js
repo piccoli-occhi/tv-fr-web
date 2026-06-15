@@ -1,10 +1,11 @@
-import './stimulus_bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
 import './styles/app.css';
+import { startStimulusApp, registerControllers } from 'vite-plugin-symfony/stimulus/helpers';
+import { registerVueControllerComponents } from 'vite-plugin-symfony/stimulus/helpers/vue';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+registerVueControllerComponents(import.meta.glob('./vue/controllers/**/*.vue'));
+
+const app = startStimulusApp();
+registerControllers(
+    app,
+    import.meta.glob('./controllers/*_controller.js', { query: '?stimulus', eager: true })
+);
