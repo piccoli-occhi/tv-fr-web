@@ -19,3 +19,6 @@ tests:
 
 open:
     open https://localhost
+
+biome:
+    npm run lint:fix
