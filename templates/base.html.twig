@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <title>{% block title %}TV FR{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📺</text></svg>">
         {% block stylesheets %}
             {{ vite_entry_link_tags('app') }}
         {% endblock %}
@@ -21,6 +21,57 @@
         {% endif %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nord-layout nav-open>
+            <nord-navigation slot="nav">
+                <nord-dropdown slot="header" expand>
+                    <nord-button slot="toggle" expand>
+                        <nord-avatar slot="start" name="TV FR" variant="square">T</nord-avatar>
+                        TV FR
+                    </nord-button>
+                    <nord-dropdown-group>
+                        <nord-dropdown-item>Personnaliser</nord-dropdown-item>
+                    </nord-dropdown-group>
+                </nord-dropdown>
+
+                <nord-nav-group heading="Menu">
+                    <nord-nav-item href="{{ path('home') }}" icon="navigation-dashboard">Accueil</nord-nav-item>
+                    <nord-nav-item href="#" icon="interface-television">Chaînes</nord-nav-item>
+                    <nord-nav-item href="#" icon="navigation-search">Programmes</nord-nav-item>
+                </nord-nav-group>
+            </nord-navigation>
+
+            <nord-top-bar slot="top-bar">
+                <nord-input expand label="Recherche" hide-label type="search" placeholder="Rechercher une chaîne ou un programme…"></nord-input>
+
+                <nord-dropdown slot="end" align="start" position="block-end">
+                    <nord-button variant="plain" slot="toggle" aria-describedby="user-tooltip">
+                        <nord-avatar style="transform: translateY(-1px)" name="Utilisateur">U</nord-avatar>
+                    </nord-button>
+                    <nord-avatar slot="header" size="s" name="Utilisateur">U</nord-avatar>
+                    <p slot="header" class="n-color-text-weak n-font-size-s">
+                        Connecté en tant que <span class="n-font-weight-active">Utilisateur</span>
+                    </p>
+                    <nord-dropdown-group>
+                        <nord-dropdown-item>Mon profil</nord-dropdown-item>
+                        <nord-dropdown-item>Paramètres</nord-dropdown-item>
+                    </nord-dropdown-group>
+                    <nord-dropdown-item>
+                        Se déconnecter
+                        <nord-icon slot="end" name="interface-logout"></nord-icon>
+                    </nord-dropdown-item>
+                </nord-dropdown>
+                <nord-tooltip id="user-tooltip">Utilisateur</nord-tooltip>
+            </nord-top-bar>
+
+            <nord-header slot="header">
+                <h1 class="n-typescale-l">
+                    {% block page_title %}{% endblock %}
+                </h1>
+            </nord-header>
+
+            {% block body %}{% endblock %}
+        </nord-layout>
+
+        <nord-command-menu></nord-command-menu>
     </body>
 </html>

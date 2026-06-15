@@ -2,7 +2,7 @@ help:
     @just --list
 
 start:
-    tmux new-session -d -s vite -c {{justfile_directory()}} 'npm run dev'
+    tmux new-session -d -s vite 'npm run dev'
     docker compose up -d
     sleep 3
     just open

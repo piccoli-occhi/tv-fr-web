@@ -1,4 +1,5 @@
 import './styles/app.css'
+import '@nordhealth/components'
 import { registerControllers, startStimulusApp } from 'vite-plugin-symfony/stimulus/helpers'
 import { registerVueControllerComponents, type VueModule } from 'vite-plugin-symfony/stimulus/helpers/vue'
 

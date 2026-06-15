@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block page_title %}Tablea de bord{% endblock %}
+
 {% block body %}
-    <div {{ vue_component('Hello', { name: 'Symfony + Vite' }) }}></div>
+    <div {{ vue_component('Dashboard') }}></div>
 {% endblock %}
