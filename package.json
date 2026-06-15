@@ -5,15 +5,18 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "biome check .",
-        "lint:fix": "biome check --write ."
+        "lint:fix": "biome check --write .",
+        "type-check": "vue-tsc --noEmit"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.5.0",
         "@commitlint/cli": "^21.0.2",
         "@commitlint/config-conventional": "^21.0.2",
         "lefthook": "^2.1.9",
+        "typescript": "^6.0.3",
         "vite": "^8.0",
-        "vite-plugin-symfony": "^8.2.4"
+        "vite-plugin-symfony": "^8.2.4",
+        "vue-tsc": "^3.3.5"
     },
     "dependencies": {
         "@hotwired/stimulus": "^3.2.2",
