@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Toutes les chaînes
+{% endblock %}
+
+{% block body %}
+    <div
+        {{
+            vue_component(
+                'ChannelList',
+                { channels: channels, total: total, totalPages: totalPages, limit: limit, loadError: loadError }
+            )
+        }}
+    ></div>
+{% endblock %}

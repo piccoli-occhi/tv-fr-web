@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    {{ channel.displayName }}
+{% endblock %}
+
+{% block body %}
+    <div
+        {{
+            vue_component(
+                'ChannelDetail',
+                {
+                    channel: channel,
+                    currentProgram: currentProgram,
+                    dayPrograms: dayPrograms
+                }
+            )
+        }}
+    ></div>
+{% endblock %}

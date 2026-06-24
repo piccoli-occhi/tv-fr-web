@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import vuePlugin from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import symfonyPlugin from 'vite-plugin-symfony'
@@ -9,6 +10,11 @@ export default defineConfig({
             stimulus: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./assets', import.meta.url)),
+        },
+    },
     build: {
         rollupOptions: {
             input: {

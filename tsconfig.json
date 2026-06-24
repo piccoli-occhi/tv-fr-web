@@ -11,7 +11,10 @@
         "isolatedModules": true,
         "noEmit": true,
         "strict": true,
-        "types": ["vite/client"]
+        "types": ["vite/client"],
+        "paths": {
+            "@/*": ["./assets/*"]
+        }
     },
     "include": ["assets/**/*.ts", "assets/**/*.d.ts", "assets/**/*.vue"]
 }

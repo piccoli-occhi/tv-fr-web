@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title %}Tablea de bord{% endblock %}
+{% block page_title %}
+    Chaînes TNT
+{% endblock %}
 
 {% block body %}
-    <div {{ vue_component('Dashboard') }}></div>
+    <div 
+        {{ 
+            vue_component(
+                'Dashboard', 
+                { channels: channels }
+            ) 
+        }}
+    ></div>
 {% endblock %}

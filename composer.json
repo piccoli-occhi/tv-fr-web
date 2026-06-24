@@ -13,6 +13,7 @@
         "pentatrion/vite-bundle": "^8.2",
         "phpdocumentor/reflection-docblock": "^6.0",
         "phpstan/phpdoc-parser": "^2.3",
+        "piccoli-occhi/tv-fr-api-php": "1.0.0-beta.1",
         "runtime/frankenphp-symfony": "^1.0",
         "symfony/asset": "7.4.*",
         "symfony/asset-mapper": "7.4.*",
