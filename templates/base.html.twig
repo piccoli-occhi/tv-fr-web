@@ -17,26 +17,31 @@
         {% if frankenphpHotReload %}
         <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
         <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+        <script>
+            // idiomorph DOM morphing ejects Lit's comment markers used by NordHealth components.
+            // Force a full reload instead so Lit reinitialises cleanly.
+            Idiomorph.morph = () => window.location.reload()
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
     <body>
         <nord-layout nav-open>
             <nord-navigation slot="nav">
-                <nord-dropdown slot="header" expand>
-                    <nord-button slot="toggle" expand>
-                        <nord-avatar slot="start" name="TV FR" variant="square">T</nord-avatar>
-                        TV FR
-                    </nord-button>
-                    <nord-dropdown-group>
-                        <nord-dropdown-item>Personnaliser</nord-dropdown-item>
-                    </nord-dropdown-group>
-                </nord-dropdown>
+                <nord-button slot="header" href="{{ path('home') }}" expand>
+                    <nord-avatar slot="start" name="TV FR" variant="square">T</nord-avatar>
+                    TV FR
+                </nord-button>
 
-                <nord-nav-group heading="Menu">
-                    <nord-nav-item href="{{ path('home') }}" icon="navigation-dashboard">Accueil</nord-nav-item>
-                    <nord-nav-item href="#" icon="interface-television">Chaînes</nord-nav-item>
-                    <nord-nav-item href="#" icon="navigation-search">Programmes</nord-nav-item>
+                <nord-nav-group heading="Chaînes">
+                    <nord-nav-item href="{{ path('home') }}" icon="interface-television">Chaîne TNT</nord-nav-item>
+                    <nord-nav-item href="{{ path('favorites') }}" icon="interface-star">Favoris</nord-nav-item>
+                    <nord-nav-item href="{{ path('channels_index') }}" icon="navigation-grid">Toutes les chaînes</nord-nav-item>
+                </nord-nav-group>
+
+                <nord-nav-group heading="Programmes">
+                    <nord-nav-item href="{{ path('programs_now') }}" icon="interface-time">Maintenant</nord-nav-item>
+                    <nord-nav-item href="{{ path('programs_tonight') }}" icon="interface-moon">Ce Soir</nord-nav-item>
                 </nord-nav-group>
             </nord-navigation>
 
@@ -69,7 +74,9 @@
                 </h1>
             </nord-header>
 
-            {% block body %}{% endblock %}
+            <div class="tv__body">
+                {% block body %}{% endblock %}
+            </div>
         </nord-layout>
 
         <nord-command-menu></nord-command-menu>

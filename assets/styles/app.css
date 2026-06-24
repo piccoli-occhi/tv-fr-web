@@ -1,10 +1,15 @@
-@import '@nordhealth/fonts/lib/fonts.css';
-@import '@nordhealth/css';
-@import '@nordhealth/themes/lib/nord.css';
+@import "@nordhealth/fonts/lib/fonts.css";
+@import "@nordhealth/css";
+@import "@nordhealth/themes/lib/nord.css";
 
 body {
-    font-family: 'Nordhealth Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji';
+    font-family:
+        "Nordhealth Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji";
+}
+
+.tv__body {
+    padding-bottom: 100px;
 }
 
 :root {
