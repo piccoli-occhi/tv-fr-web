@@ -84,6 +84,19 @@ COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile", "--watch" ]
 
+# Front-end assets builder
+FROM node:24-alpine AS node_builder
+
+WORKDIR /app
+
+COPY --link package.json package-lock.json ./
+RUN npm ci
+
+COPY --link vite.config.js tsconfig.json ./
+COPY --link assets assets
+
+RUN npm run build
+
 # Builder for the prod FrankenPHP image
 FROM frankenphp_base AS frankenphp_prod_builder
 
@@ -99,6 +112,9 @@ RUN composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scri
 
 # copy sources
 COPY --link --exclude=frankenphp/ . ./
+
+# overwrite with the front-end assets built by Vite
+COPY --link --from=node_builder /app/public/build ./public/build
 
 RUN <<-EOF
 	mkdir -p var/cache var/log var/share
