@@ -66,7 +66,8 @@ function handleImageError(): void {
 
 <style scoped>
 .channel-card {
-    flex: 0 0 calc(25% - var(--n-space-l) * 0.75);
+    flex: 1 1 260px;
+    max-width: 340px;
 }
 
 .channel-name {
