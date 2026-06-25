@@ -1,20 +1,18 @@
 import { computed } from 'vue'
-import type { Channel } from '@/vue/types/channel'
+import type { Program } from '@/vue/types/channel'
 
-export function useChannel(channel: Channel) {
-    const voteCount = computed(() => channel.current?.details?.voteCount ?? 0)
+export function useProgram(program: Program | null) {
+    const voteCount = computed(() => program?.details?.voteCount ?? 0)
 
     const popularity = computed(() => {
-        const raw = channel.current?.details?.popularity ?? null
+        const raw = program?.details?.popularity ?? null
 
         return voteCount.value === 0 || raw === null ? null : Math.round(raw)
     })
 
-    const poster = computed(() => {
-        const { current } = channel
+    const poster = computed(() => program?.icon || program?.details?.poster || program?.details?.secondaryPoster || null)
 
-        return current?.icon || current?.details?.poster || current?.details?.secondaryPoster || null
-    })
+    const tmdbUrl = computed(() => program?.details?.tmdbUrl ?? null)
 
     function formatTime(iso: string): string {
         return new Date(iso).toLocaleTimeString('fr-FR', {
@@ -27,6 +25,7 @@ export function useChannel(channel: Channel) {
         voteCount,
         popularity,
         poster,
+        tmdbUrl,
         formatTime,
     }
 }

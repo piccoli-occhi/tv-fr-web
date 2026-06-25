@@ -15,7 +15,7 @@
                 variant="square"
             ></nord-avatar>
             <a
-                :href="`/channel/${encodeURIComponent(props.channel.xmlId)}`"
+                :href="channelHref"
                 class="channel-name"
             >{{ props.channel.displayName }}</a>
         </nord-stack>
@@ -24,38 +24,70 @@
             direction="vertical"
             gap="s"
         >
-            <img
-                :src="imageLoadFailed ? '/images/no-poster.svg' : poster ?? '/images/no-poster.svg'"
-                :alt="props.channel.current?.title ?? props.channel.displayName"
-                class="program-image"
-                @error="handleImageError()"
-            />
-            <strong>{{ props.channel.current?.title ?? 'Aucun programme en cours' }}</strong>
+            <a :href="channelHref">
+                <img
+                    :src="imageLoadFailed ? '/images/no-poster.svg' : poster ?? '/images/no-poster.svg'"
+                    :alt="props.channel.current?.title ?? props.channel.displayName"
+                    class="program-image"
+                    @error="handleImageError()"
+                />
+            </a>
+            <nord-stack
+                direction="horizontal"
+                align-items="center"
+                justify-content="space-between"
+                gap="s"
+            >
+                <a
+                    :href="channelHref"
+                    class="program-title"
+                >{{ props.channel.current?.title ?? 'Aucun programme en cours' }}</a>
+                <span
+                    v-if="popularity !== null"
+                    class="program-popularity"
+                >
+                    <nord-icon name="interface-star-filled"></nord-icon>
+                    {{ popularity }}
+                </span>
+            </nord-stack>
             <span
                 v-if="props.channel.current"
                 class="program-time"
             >{{ formatTime(props.channel.current.startAt) }} – {{ formatTime(props.channel.current.stopAt) }}</span>
-            <span
-                v-if="popularity !== null"
-                class="program-popularity"
+        </nord-stack>
+
+        <nord-stack
+            v-if="tmdbUrl"
+            slot="footer"
+            direction="horizontal"
+            justify-content="end"
+        >
+            <nord-button
+                variant="plain"
+                size="s"
+                class="tmdb-button"
+                :href="tmdbUrl"
+                target="_blank"
+                rel="noopener"
             >
-                <nord-icon name="interface-star-filled"></nord-icon>
-                {{ popularity }}
-            </span>
+                fiche tmdb
+            </nord-button>
         </nord-stack>
     </nord-card>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useChannel } from '@/vue/composables/useChannel'
+import { computed, ref } from 'vue'
+import { useProgram } from '@/vue/composables/useProgram'
 import type { Channel } from '@/vue/types/channel'
 
 const props = defineProps<{
     channel: Channel
 }>()
 
-const { poster, popularity, formatTime } = useChannel(props.channel)
+const { poster, popularity, tmdbUrl, formatTime } = useProgram(props.channel.current)
+
+const channelHref = computed(() => `/channel/${encodeURIComponent(props.channel.xmlId)}`)
 
 const imageLoadFailed = ref(false)
 
@@ -66,7 +98,8 @@ function handleImageError(): void {
 
 <style scoped>
 .channel-card {
-    flex: 0 0 calc(25% - var(--n-space-l) * 0.75);
+    flex: 1 1 260px;
+    max-width: 340px;
 }
 
 .channel-name {
@@ -75,6 +108,16 @@ function handleImageError(): void {
 }
 
 .channel-name:hover {
+    text-decoration: underline;
+}
+
+.program-title {
+    color: inherit;
+    text-decoration: none;
+    font-weight: var(--n-font-weight-strong);
+}
+
+.program-title:hover {
     text-decoration: underline;
 }
 
@@ -95,5 +138,12 @@ function handleImageError(): void {
     align-items: center;
     gap: var(--n-space-xs);
     font-size: var(--n-font-size-s);
+}
+
+.tmdb-button {
+    --n-button-border-radius: var(--n-border-radius-pill);
+    --n-button-background-color: var(--n-color-status-info-weak);
+    --n-button-border-color: var(--n-color-border-info);
+    --n-button-color: var(--n-color-text-info);
 }
 </style>

@@ -1,7 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block page_title %}
-    {{ channel.displayName }}
+    <nord-stack
+        direction="horizontal"
+        align-items="center"
+        gap="m"
+        class="channel-page-title"
+    >
+        <nord-button
+            href="{{ path('channels_index') }}"
+            class="channel-page-title__back"
+            size="s"
+            square
+            aria-label="Retour à la liste des chaînes"
+        >
+            <nord-icon name="arrow-left"></nord-icon>
+        </nord-button>
+        <nord-avatar
+            {% if channel.icon %}src="{{ channel.icon }}"{% endif %}
+            name="{{ channel.displayName }}"
+            variant="square"
+        ></nord-avatar>
+        {{ channel.displayName }}
+    </nord-stack>
 {% endblock %}
 
 {% block body %}
@@ -10,7 +31,6 @@
             vue_component(
                 'ChannelDetail',
                 {
-                    channel: channel,
                     currentProgram: currentProgram,
                     dayPrograms: dayPrograms
                 }

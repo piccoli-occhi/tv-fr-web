@@ -13,6 +13,7 @@ export type Program = {
         voteCount?: number
         poster?: string
         secondaryPoster?: string
+        tmdbUrl?: string
     } | null
 }
 

@@ -38,6 +38,15 @@
             </nord-button>
         </nord-stack>
     </nord-stack>
+
+    <nord-button
+        class="back-to-top-button"
+        square
+        aria-label="Retour en haut de la liste"
+        @click="scrollToTop()"
+    >
+        <nord-icon name="arrow-up"></nord-icon>
+    </nord-button>
 </template>
 
 <script setup lang="ts">
@@ -75,12 +84,26 @@ const {
 })
 
 const errorMessage = computed(() => (error.value ? ERROR_MESSAGES[error.value] : null))
+
+function scrollToTop(): void {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    })
+}
 </script>
 
 <style scoped>
 .error-notifications {
     position: fixed;
     top: var(--n-space-l);
+    right: var(--n-space-l);
+    z-index: 1000;
+}
+
+.back-to-top-button {
+    position: fixed;
+    bottom: var(--n-space-l);
     right: var(--n-space-l);
     z-index: 1000;
 }
