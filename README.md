@@ -18,3 +18,23 @@ Otherwise:
 npm run dev &
 docker compose up -d
 ```
+
+## Vite HTTPS certificate
+
+Vite serves dev assets over HTTPS (matches the app's `https://localhost`, avoids mixed-content errors). One-time setup:
+
+```bash
+brew install mkcert
+mkcert -install
+mkdir -p certs
+mkcert -key-file certs/vite.key.pem -cert-file certs/vite.crt.pem localhost 127.0.0.1 ::1
+```
+
+## Testing on the iOS Simulator
+
+The simulator needs to trust the same certificate:
+
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+xcrun simctl keychain booted add-root-cert "$(mkcert -CAROOT)/rootCA.pem"
+```
