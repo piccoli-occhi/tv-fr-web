@@ -12,6 +12,16 @@ body {
     padding-bottom: 100px;
 }
 
+.channel-page-title__back {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .channel-page-title__back {
+        display: inline-flex;
+    }
+}
+
 :root {
     --n-color-accent-secondary: #310d77;
 }
