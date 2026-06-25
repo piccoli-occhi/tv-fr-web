@@ -26,27 +26,26 @@
         </nord-stack>
 
         <nord-stack
-            v-if="!isLastPage"
             direction="horizontal"
             justify-content="center"
+            gap="m"
         >
             <nord-button
+                v-if="!isLastPage"
                 :loading="loading || undefined"
                 @click="store.loadNextPage()"
             >
                 Charger plus
             </nord-button>
+            <nord-button
+                square
+                aria-label="Retour en haut de la liste"
+                @click="scrollToTop()"
+            >
+                <nord-icon name="arrow-up"></nord-icon>
+            </nord-button>
         </nord-stack>
     </nord-stack>
-
-    <nord-button
-        class="back-to-top-button"
-        square
-        aria-label="Retour en haut de la liste"
-        @click="scrollToTop()"
-    >
-        <nord-icon name="arrow-up"></nord-icon>
-    </nord-button>
 </template>
 
 <script setup lang="ts">
@@ -97,13 +96,6 @@ function scrollToTop(): void {
 .error-notifications {
     position: fixed;
     top: var(--n-space-l);
-    right: var(--n-space-l);
-    z-index: 1000;
-}
-
-.back-to-top-button {
-    position: fixed;
-    bottom: var(--n-space-l);
     right: var(--n-space-l);
     z-index: 1000;
 }
